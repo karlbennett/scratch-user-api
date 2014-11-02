@@ -1,6 +1,8 @@
-package scratch.user;
+package scratch.user.test;
 
-import static scratch.user.AddressConstants.address;
+import scratch.user.User;
+
+import static scratch.user.test.AddressConstants.address;
 
 /**
  * Data for user persistence tests.

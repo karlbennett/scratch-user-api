@@ -1,14 +1,16 @@
 package scratch.user;
 
 import org.junit.Test;
+import scratch.user.test.Equals;
+import scratch.user.test.UserConstants;
 
 import static java.lang.String.format;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static scratch.user.AddressConstants.addressOne;
-import static scratch.user.UserConstants.user;
+import static scratch.user.test.AddressConstants.addressOne;
+import static scratch.user.test.UserConstants.user;
 
 public class UserTest {
 

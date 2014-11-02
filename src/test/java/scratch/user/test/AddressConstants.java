@@ -1,4 +1,6 @@
-package scratch.user;
+package scratch.user.test;
+
+import scratch.user.Address;
 
 /**
  * Data for user persistence tests.

@@ -9,9 +9,9 @@ import java.io.InputStream;
 
 import static java.lang.String.format;
 import static org.junit.Assert.assertEquals;
-import static scratch.user.AddressConstants.ADDRESS_ID;
-import static scratch.user.UserConstants.USER_ID;
-import static scratch.user.UserConstants.user;
+import static scratch.user.test.AddressConstants.ADDRESS_ID;
+import static scratch.user.test.UserConstants.USER_ID;
+import static scratch.user.test.UserConstants.user;
 
 public class UserSerialisationTest {
 

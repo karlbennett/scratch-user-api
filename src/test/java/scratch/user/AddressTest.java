@@ -1,6 +1,8 @@
 package scratch.user;
 
 import org.junit.Test;
+import scratch.user.test.AddressConstants;
+import scratch.user.test.Equals;
 
 import static java.lang.String.format;
 import static org.junit.Assert.assertEquals;

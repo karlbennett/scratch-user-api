@@ -1,14 +1,16 @@
-package scratch.user;
+package scratch.user.data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import scratch.user.User;
+import scratch.user.Users;
 
 import javax.persistence.EntityNotFoundException;
 
 import static java.lang.String.format;
 
 /**
- * An implementation of the {@link Users} interface that uses a spring data repository.
+ * An implementation of the {@link scratch.user.Users} interface that uses a spring data repository.
  *
  * @author Karl Bennett
  */

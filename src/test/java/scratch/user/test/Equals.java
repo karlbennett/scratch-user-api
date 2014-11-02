@@ -1,4 +1,4 @@
-package scratch.user;
+package scratch.user.test;
 
 public interface Equals<T> {
 
