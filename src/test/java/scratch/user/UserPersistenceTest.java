@@ -28,14 +28,16 @@ public class UserPersistenceTest {
     @Test
     public void I_can_persist_a_user() {
 
-        final User user = user();
+        final User expected = user();
 
-        final User persistedUser = users.create(user);
+        final Long id = users.create(expected);
 
-        user.setId(persistedUser.getId());
-        user.getAddress().setId(persistedUser.getAddress().getId());
+        final User actual = users.retrieve(id);
 
-        assertEquals("the persisted user should be correct.", user, users.retrieve(persistedUser.getId()));
+        expected.setId(id);
+        expected.getAddress().setId(actual.getAddress().getId());
+
+        assertEquals("the persisted user should be correct.", expected, actual);
     }
 
     @Test(expected = ConstraintViolationException.class)

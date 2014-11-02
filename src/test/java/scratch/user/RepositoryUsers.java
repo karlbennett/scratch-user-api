@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityNotFoundException;
 
-import static java.lang.String.*;
+import static java.lang.String.format;
 
 /**
  * An implementation of the {@link Users} interface that uses a spring data repository.
@@ -23,13 +23,13 @@ public class RepositoryUsers implements Users {
     }
 
     @Override
-    public User create(User user) {
+    public Long create(User user) {
 
         // Null out the ID's so that a create is actually attempted not an update.
         user.setId(null);
         user.getAddress().setId(null);
 
-        return repository.save(user);
+        return repository.save(user).getId();
     }
 
     @Override
@@ -45,13 +45,13 @@ public class RepositoryUsers implements Users {
     }
 
     @Override
-    public User update(User user) {
+    public void update(User user) {
 
-        if (null == user.getId()){
+        if (null == user.getId()) {
             throw new EntityNotFoundException(format("User %s has not been persisted.", user));
         }
 
-        return repository.save(user);
+        repository.save(user);
     }
 
     @Override

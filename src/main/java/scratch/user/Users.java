@@ -7,13 +7,13 @@ package scratch.user;
  */
 public interface Users {
 
-    User create(User user);
+    Long create(User user);
 
     User retrieve(Long id);
 
     Iterable<User> retrieve();
 
-    User update(User user);
+    void update(User user);
 
     void delete(Long id);
 
