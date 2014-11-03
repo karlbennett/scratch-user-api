@@ -3,9 +3,6 @@ package scratch.user;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -19,11 +16,7 @@ import java.io.Serializable;
  * @author Karl Bennett
  */
 @Entity
-public class User implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class User extends Id implements Serializable {
 
     @NotNull(message = "email.null")
     @Size(min = 1)
@@ -54,20 +47,21 @@ public class User implements Serializable {
     }
 
     public User(String email, String firstName, String lastName, String phoneNumber, Address address) {
+        this(null, email, firstName, lastName, phoneNumber, address);
+    }
 
+    public User(User user) {
+        this(user.getId(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber(),
+                new Address(user.getAddress()));
+    }
+
+    public User(Long id, String email, String firstName, String lastName, String phoneNumber, Address address) {
+        super(id);
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.address = address;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getEmail() {
@@ -111,18 +105,21 @@ public class User implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object object) {
 
-        if (this == o) {
+        if (this == object) {
             return true;
         }
-        if (!(o instanceof User)) {
+        if (!(object instanceof User)) {
+            return false;
+        }
+        if (!super.equals(object)) {
             return false;
         }
 
-        final User that = (User) o;
+        final User that = (User) object;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) {
+        if (address != null ? !address.equals(that.address) : that.address != null) {
             return false;
         }
         if (email != null ? !email.equals(that.email) : that.email != null) {
@@ -137,9 +134,6 @@ public class User implements Serializable {
         if (phoneNumber != null ? !phoneNumber.equals(that.phoneNumber) : that.phoneNumber != null) {
             return false;
         }
-        if (address != null ? !address.equals(that.address) : that.address != null) {
-            return false;
-        }
 
         return true;
     }
@@ -147,7 +141,7 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
 
-        int result = id != null ? id.hashCode() : 0;
+        int result = super.hashCode();
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
@@ -161,7 +155,7 @@ public class User implements Serializable {
     public String toString() {
 
         return "User {" +
-              /**/"id = " + id +
+              /**/"id = " + getId() +
                 ", email = '" + email + '\'' +
                 ", firstName = '" + firstName + '\'' +
                 ", lastName = '" + lastName + '\'' +

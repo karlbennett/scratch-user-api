@@ -30,11 +30,13 @@ public class UserPersistenceTest {
 
         final User expected = user();
 
-        final Long id = users.create(expected);
+        final Id id = users.create(expected);
 
-        final User actual = users.retrieve(id);
+        final Long userId = id.getId();
 
-        expected.setId(id);
+        final User actual = users.retrieve(userId);
+
+        expected.setId(userId);
         expected.getAddress().setId(actual.getAddress().getId());
 
         assertEquals("the persisted user should be correct.", expected, actual);

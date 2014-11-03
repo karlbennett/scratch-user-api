@@ -2,6 +2,7 @@ package scratch.user.data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import scratch.user.Id;
 import scratch.user.User;
 import scratch.user.Users;
 
@@ -25,13 +26,13 @@ public class RepositoryUsers implements Users {
     }
 
     @Override
-    public Long create(User user) {
+    public Id create(User user) {
 
         // Null out the ID's so that a create is actually attempted not an update.
         user.setId(null);
         user.getAddress().setId(null);
 
-        return repository.save(user).getId();
+        return new Id(repository.save(user));
     }
 
     @Override

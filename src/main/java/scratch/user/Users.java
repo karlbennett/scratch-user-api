@@ -7,7 +7,7 @@ package scratch.user;
  */
 public interface Users {
 
-    Long create(User user);
+    Id create(User user);
 
     User retrieve(Long id);
 

@@ -7,7 +7,6 @@ import scratch.user.test.UserConstants;
 import static java.lang.String.format;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static scratch.user.test.AddressConstants.addressOne;
 import static scratch.user.test.UserConstants.user;
@@ -15,9 +14,11 @@ import static scratch.user.test.UserConstants.user;
 public class UserTest {
 
     @Test
-    public void the_users_id_is_set_to_null_when_created() {
+    public void I_can_copy_a_user() {
 
-        assertNull("the users id should be null.", user().getId());
+        final User user = user();
+
+        assertEquals("the copied user should be correct.", user, new User(user));
     }
 
     @Test

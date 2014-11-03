@@ -8,11 +8,20 @@ import static java.lang.String.format;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static scratch.user.test.AddressConstants.address;
 
 public class AddressTest {
 
     private static final Long DIFFERENT_ADDRESS_ID = 4L;
     private static final Integer DIFFERENT_NUMBER = 5;
+
+    @Test
+    public void I_can_copy_an_address() {
+
+        final Address address = address();
+
+        assertEquals("the copied address should be correct.", address, new Address(address));
+    }
 
     @Test
     public void I_can_check_the_equality_of_a_user() {
@@ -98,7 +107,7 @@ public class AddressTest {
     @Test
     public void I_can_to_string_a_address() {
 
-        final Address address = AddressConstants.address();
+        final Address address = address();
 
         assertEquals("the address should produce the correct toString value.",
                 format(

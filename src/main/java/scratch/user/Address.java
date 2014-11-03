@@ -2,9 +2,6 @@ package scratch.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -13,11 +10,7 @@ import java.io.Serializable;
  * @author Karl Bennett
  */
 @Entity
-public class Address implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Address extends Id implements Serializable {
 
     @Column
     private Integer number;
@@ -38,20 +31,21 @@ public class Address implements Serializable {
     }
 
     public Address(Integer number, String street, String suburb, String city, String postcode) {
+        this(null, number, street, suburb, city, postcode);
+    }
 
+    public Address(Address address) {
+        this(address.getId(), address.getNumber(), address.getStreet(), address.getSuburb(), address.getCity(),
+                address.getPostcode());
+    }
+
+    public Address(Long id, Integer number, String street, String suburb, String city, String postcode) {
+        super(id);
         this.number = number;
         this.street = street;
         this.suburb = suburb;
         this.city = city;
         this.postcode = postcode;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Integer getNumber() {
@@ -95,33 +89,33 @@ public class Address implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object object) {
 
-        if (this == o) {
+        if (this == object) {
             return true;
         }
-        if (!(o instanceof Address)) {
+        if (!(object instanceof Address)) {
+            return false;
+        }
+        if (!super.equals(object)) {
             return false;
         }
 
-        final Address address = (Address) o;
+        final Address that = (Address) object;
 
-        if (city != null ? !city.equals(address.city) : address.city != null) {
+        if (city != null ? !city.equals(that.city) : that.city != null) {
             return false;
         }
-        if (id != null ? !id.equals(address.id) : address.id != null) {
+        if (number != null ? !number.equals(that.number) : that.number != null) {
             return false;
         }
-        if (number != null ? !number.equals(address.number) : address.number != null) {
+        if (postcode != null ? !postcode.equals(that.postcode) : that.postcode != null) {
             return false;
         }
-        if (postcode != null ? !postcode.equals(address.postcode) : address.postcode != null) {
+        if (street != null ? !street.equals(that.street) : that.street != null) {
             return false;
         }
-        if (street != null ? !street.equals(address.street) : address.street != null) {
-            return false;
-        }
-        if (suburb != null ? !suburb.equals(address.suburb) : address.suburb != null) {
+        if (suburb != null ? !suburb.equals(that.suburb) : that.suburb != null) {
             return false;
         }
 
@@ -131,7 +125,7 @@ public class Address implements Serializable {
     @Override
     public int hashCode() {
 
-        int result = id != null ? id.hashCode() : 0;
+        int result = super.hashCode();
         result = 31 * result + (number != null ? number.hashCode() : 0);
         result = 31 * result + (street != null ? street.hashCode() : 0);
         result = 31 * result + (suburb != null ? suburb.hashCode() : 0);
@@ -144,7 +138,7 @@ public class Address implements Serializable {
     @Override
     public String toString() {
         return "Address {" +
-              /**/"id = " + id +
+              /**/"id = " + getId() +
                 ", number = " + number +
                 ", street = '" + street + '\'' +
                 ", suburb = '" + suburb + '\'' +
